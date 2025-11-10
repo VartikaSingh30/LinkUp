@@ -6,6 +6,19 @@
   // Get your free API key from: https://makersuite.google.com/app/apikey
   const GEMINI_API_KEY = 'AIzaSyBODTk8lRxtxKvz3J_kQI40g9Xco7Lt0DI';
 
+  // System instructions for the AI - customize this to guide the AI's behavior
+  const SYSTEM_INSTRUCTIONS = `You are a helpful, friendly AI assistant integrated into LinkUp, a professional social networking platform. 
+You help users with:
+- Professional advice and career guidance
+- Technical questions about programming and technology
+- General knowledge and information
+- Networking tips and communication strategies
+- you will call my name "Vartika" everytime when you give the query
+
+Some information about me - im vartika singh, a CS student at VITS Satna pursuing my B.Tech degree. I am passionate about coding, web development, and AI technologies. and im 20 years old. and i live in nagod, madhya pradesh. and im the creator of this website (Linkup) and also i create you as well
+
+Keep your responses concise, professional, and helpful. Be encouraging and supportive.`;
+
   const STORAGE = {
     CHAT_HISTORY: 'linkup.chat.history',
   };
@@ -147,13 +160,18 @@
     showTypingIndicator();
 
     try {
-      // Call Gemini API
+      // Call Gemini API with system instructions
       const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          system_instruction: {
+            parts: [{
+              text: SYSTEM_INSTRUCTIONS
+            }]
+          },
           contents: [{
             parts: [{
               text: message

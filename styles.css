@@ -1693,16 +1693,12 @@ body.dark .suggest-list li:hover {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  width: 100%;
-  max-width: 100%;
 }
 
 /* Profile Header */
 .profile-header {
   padding: 0;
   overflow: hidden;
-  width: 100%;
-  max-width: 100%;
 }
 
 .profile-cover {
@@ -1810,8 +1806,6 @@ body.dark .suggest-list li:hover {
 /* Profile Sections */
 .profile-section {
   padding: 2.5rem 3rem;
-  width: 100%;
-  max-width: 100%;
 }
 
 .section-header {
@@ -1856,8 +1850,6 @@ body.dark .suggest-list li:hover {
   border-radius: 16px;
   margin-bottom: 1.5rem;
   transition: all 0.2s ease;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .profile-item:hover {
@@ -1998,7 +1990,7 @@ body.dark .suggest-list li:hover {
   background: var(--surface);
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  max-width: 800px;
+  max-width: 600px;
   width: 100%;
   max-height: 90vh;
   overflow: hidden;
