@@ -1,4 +1,4 @@
-// Profile Page Script
+﻿// Profile Page Script
 (function () {
   'use strict';
 

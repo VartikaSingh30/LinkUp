@@ -48,7 +48,6 @@
     charCount: $('#charCount'),
     postBtn: $('#postBtn'),
     feed: $('#feed'),
-    themeToggle: $('#themeToggle'),
   };
 
   // State
@@ -81,10 +80,6 @@
         topbar.classList.toggle('scrolled', scrolled);
       }
     });
-
-    // Theme
-    applySavedTheme();
-    if (el.themeToggle) el.themeToggle.addEventListener('click', toggleTheme);
 
     // Composer events
     if (el.composerText) {
@@ -183,16 +178,7 @@
     return Math.random().toString(16).slice(2) + Date.now().toString(16);
   }
 
-  // Theme
-  function applySavedTheme() {
-    const t = localStorage.getItem(STORAGE.THEME);
-    if (t === 'dark') document.body.classList.add('dark');
-    if (t === 'light') document.body.classList.remove('dark');
-  }
-  function toggleTheme() {
-    const dark = document.body.classList.toggle('dark');
-    localStorage.setItem(STORAGE.THEME, dark ? 'dark' : 'light');
-  }
+
 
   // Composer handlers
   function handleComposerInput() {
