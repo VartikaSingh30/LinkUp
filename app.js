@@ -22,9 +22,9 @@
     return {
       id: 'me',
       name: 'Vartika Singh',
-      headline: 'CS Student at VIT Vellore | Full Stack Developer',
-      college: 'VIT Vellore',
-      location: 'Vellore, Tamil Nadu',
+      headline: 'CS Student at VITS Satna | Full Stack Developer',
+      college: 'VITS (Vindhya Institute of Technology and Science), Satna',
+      location: 'Satna, Madhya Pradesh',
       color: '#667eea',
     };
   }

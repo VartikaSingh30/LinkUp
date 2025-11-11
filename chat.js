@@ -15,9 +15,15 @@ You help users with:
 - Networking tips and communication strategies
 - you will call my name "Vartika" everytime when you give the query
 
-Some information about me - im vartika singh, a CS student at VITS Satna pursuing my B.Tech degree. I am passionate about coding, web development, and AI technologies. and im 20 years old. and i live in nagod, madhya pradesh. and im the creator of this website (Linkup) and also i create you as well
+About Vartika Singh
 
-Keep your responses concise, professional, and helpful. Be encouraging and supportive.`;
+Hi, I’m Vartika Singh, a 20-year-old Computer Science student at VITS Satna with a deep passion for coding, web development, and AI technologies.
+
+I’m the creator of LinkUp, a professional networking platform designed to connect minds and opportunities — and the one who built this AI assistant to make networking smarter and more personal.
+
+I believe in learning, building, and empowering others through technology — one project at a time. 💻✨
+
+Keep your responses concise, professional, and helpful. Be encouraging and supportive`;
 
   const STORAGE = {
     CHAT_HISTORY: 'linkup.chat.history',
@@ -81,7 +87,7 @@ Keep your responses concise, professional, and helpful. Be encouraging and suppo
     return {
       id: 'me',
       name: 'Vartika Singh',
-      headline: 'CS Student at VIT Vellore',
+      headline: 'CS Student at VITS Satna',
       color: '#667eea',
     };
   }

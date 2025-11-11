@@ -38,15 +38,27 @@
       </nav>
     </header>
 
+    <!-- Mobile Menu Toggle -->
+    <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+      </svg>
+    </button>
+
     <main class="container" style="max-width: 1100px;">
       <!-- Left Sidebar -->
-      <aside class="sidebar-left">
+      <aside class="sidebar-left" id="mobileSidebar">
+        <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
         <section class="card profile-card">
           <div class="profile-card__header"></div>
           <div class="profile-card__body">
             <div class="avatar" id="profileAvatar">VS</div>
             <h2 class="profile__name" id="profileName">Vartika Singh</h2>
-            <p class="profile__headline" id="profileHeadline">Computer Science Student at VIT Vellore</p>
+            <p class="profile__headline" id="profileHeadline">Computer Science Student at VITS Satna</p>
           </div>
           <div class="profile-card__footer">
             <a class="link" href="profile.html">View profile</a>
@@ -56,47 +68,197 @@
         <nav class="card shortcuts">
           <h3 class="card__title">Manage</h3>
           <ul>
-            <li><a href="#">Connections</a></li>
-            <li><a href="network.html">Groups</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Saved</a></li>
+            <li><a href="#" id="navMyNetwork">My Network</a></li>
+            <li><a href="#" id="navRecommended">Recommendations</a></li>
+            <li><a href="#" id="navMutual">Mutual Connections</a></li>
+            <li><a href="#" id="navGroups">Groups</a></li>
           </ul>
         </nav>
       </aside>
 
       <!-- Main Content -->
       <section class="feed">
-        <!-- Create Group Card -->
+        <!-- Network Header -->
         <article class="card network-header">
           <div class="network-header-content">
             <h1>My Network</h1>
-            <p class="muted">Create and manage your groups</p>
+            <p class="muted">Manage your professional network</p>
           </div>
-          <button id="createGroupBtn" class="btn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
-              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-            </svg>
-            Create Group
-          </button>
         </article>
 
-        <!-- Groups List -->
-        <article class="card">
-          <div class="card__title">Your Groups</div>
-          <div id="groupsList" class="network-groups-list">
-            <div class="empty-state-network">
-              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        <!-- Tab Navigation -->
+        <article class="card" style="padding: 0; overflow: hidden;">
+          <div class="network-tabs">
+            <button class="network-tab active" data-tab="mynetwork">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V20h14v-3.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V20h6v-3.5c0-2.33-4.67-3.5-7-3.5z"/>
               </svg>
-              <h3>No groups yet</h3>
-              <p>Create your first group to start connecting with others</p>
-            </div>
+              My Network
+            </button>
+            <button class="network-tab" data-tab="recommended">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              Recommended
+            </button>
+            <button class="network-tab" data-tab="mutual">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              Mutual
+            </button>
+            <button class="network-tab" data-tab="groups">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12.75c1.63 0 3.07.39 4.24.9 1.08.48 1.76 1.56 1.76 2.73V18H6v-1.61c0-1.18.68-2.26 1.76-2.73 1.17-.52 2.61-.91 4.24-.91zM4 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm1.13 1.1c-.37-.06-.74-.1-1.13-.1-.99 0-1.93.21-2.78.58C.48 14.9 0 15.62 0 16.43V18h4.5v-1.61c0-.83.23-1.61.63-2.29zM20 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4 3.43c0-.81-.48-1.53-1.22-1.85-.85-.37-1.79-.58-2.78-.58-.39 0-.76.04-1.13.1.4.68.63 1.46.63 2.29V18H24v-1.57zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/>
+              </svg>
+              Groups
+            </button>
           </div>
         </article>
+
+        <!-- My Network Tab Content -->
+        <div id="mynetworkContent" class="network-content">
+          <article class="card">
+            <div class="card__title" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>My Connections (<span id="connectionCount">0</span>)</span>
+            </div>
+            <div id="myNetworkList" class="network-list"></div>
+          </article>
+        </div>
+
+        <!-- Recommended Tab Content -->
+        <div id="recommendedContent" class="network-content" style="display: none;">
+          <article class="card">
+            <div class="card__title">People you may know</div>
+            <div id="recommendedList" class="network-list"></div>
+          </article>
+        </div>
+
+        <!-- Mutual Tab Content -->
+        <div id="mutualContent" class="network-content" style="display: none;">
+          <article class="card">
+            <div class="card__title">Mutual Connections</div>
+            <div id="mutualList" class="network-list"></div>
+          </article>
+        </div>
+
+        <!-- Groups Tab Content -->
+        <div id="groupsContent" class="network-content" style="display: none;">
+          <article class="card">
+            <div class="card__title" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>Your Groups</span>
+              <button id="createGroupBtn" class="btn btn--sm">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+                Create Group
+              </button>
+            </div>
+            <div id="groupsList" class="network-groups-list"></div>
+          </article>
+        </div>
       </section>
+
+      <!-- Right Sidebar -->
+      <aside class="sidebar-right">
+        <section class="card create-group-card">
+          <div class="create-group-header">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="create-group-icon">
+              <path d="M12 12.75c1.63 0 3.07.39 4.24.9 1.08.48 1.76 1.56 1.76 2.73V18H6v-1.61c0-1.18.68-2.26 1.76-2.73 1.17-.52 2.61-.91 4.24-.91zM4 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm1.13 1.1c-.37-.06-.74-.1-1.13-.1-.99 0-1.93.21-2.78.58C.48 14.9 0 15.62 0 16.43V18h4.5v-1.61c0-.83.23-1.61.63-2.29zM20 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4 3.43c0-.81-.48-1.53-1.22-1.85-.85-.37-1.79-.58-2.78-.58-.39 0-.76.04-1.13.1.4.68.63 1.46.63 2.29V18H24v-1.57zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/>
+            </svg>
+            <h3>Create a Group</h3>
+            <p>Build your community</p>
+          </div>
+          <form id="quickGroupForm" class="quick-group-form">
+            <div class="form-group">
+              <label for="quickGroupName">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Group Name
+              </label>
+              <input 
+                type="text" 
+                id="quickGroupName" 
+                name="quickGroupName" 
+                placeholder="e.g., Web Developers India" 
+                required 
+                maxlength="100"
+              />
+              <small class="input-hint">Choose a descriptive name</small>
+            </div>
+            <div class="form-group">
+              <label for="quickGroupDescription">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                Description
+              </label>
+              <textarea 
+                id="quickGroupDescription" 
+                name="quickGroupDescription" 
+                rows="4" 
+                placeholder="What's your group about? Share the purpose and activities..."
+                required
+                maxlength="500"
+              ></textarea>
+              <small class="input-hint char-count"><span id="charCount">0</span>/500 characters</small>
+            </div>
+            <button type="submit" class="btn btn--block btn--gradient">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+              Create Group
+            </button>
+          </form>
+        </section>
+
+        <section class="card stats-card">
+          <div class="card__title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V20h14v-3.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V20h6v-3.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            Network Stats
+          </div>
+          <div class="network-stats">
+            <div class="stat-item">
+              <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                  <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V20h14v-3.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V20h6v-3.5c0-2.33-4.67-3.5-7-3.5z"/>
+                </svg>
+              </div>
+              <div class="stat-content">
+                <div class="stat-value" id="statsConnections">0</div>
+                <div class="stat-label">Connections</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                  <path d="M12 12.75c1.63 0 3.07.39 4.24.9 1.08.48 1.76 1.56 1.76 2.73V18H6v-1.61c0-1.18.68-2.26 1.76-2.73 1.17-.52 2.61-.91 4.24-.91zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/>
+                </svg>
+              </div>
+              <div class="stat-content">
+                <div class="stat-value" id="statsGroups">0</div>
+                <div class="stat-label">Groups</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                  <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </div>
+              <div class="stat-content">
+                <div class="stat-value" id="statsRecommended">8</div>
+                <div class="stat-label">Suggested</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </aside>
     </main>
 
     <!-- Create Group Modal -->
