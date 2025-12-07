@@ -33,13 +33,13 @@ export function RightSidebar() {
                     </p>
 
                     <div className="mt-4 flex justify-center gap-2">
-                        <a href="https://github.com/VartikaSingh30" className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-full transition">
+                        <a href="https://github.com/VartikaSingh30" className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-full transition" target='_blank'>
                             <Github size={18} />
                         </a>
-                        <a href="https://www.linkedin.com/in/contact-vartikasingh?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className="p-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-full transition">
+                        <a href="https://www.linkedin.com/in/contact-vartikasingh?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className="p-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-full transition" target='_blank'>
                             <Linkedin size={18} />
                         </a>
-                        <a href="https://x.com/Vartikaa_X?t=AerkX8VJuo1hAvpO8aAXjA&s=08" className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-full transition">
+                        <a href="https://x.com/Vartikaa_X?t=AerkX8VJuo1hAvpO8aAXjA&s=08" className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-full transition" target='_blank'>
                             <ExternalLink size={18} />
                         </a>
                     </div>
