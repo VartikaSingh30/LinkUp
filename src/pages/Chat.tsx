@@ -33,6 +33,7 @@ export function ChatPage() {
   };
 
   const formatMessage = (text: string) => {
+    if (!text) return '';
     return text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
@@ -153,8 +154,8 @@ export function ChatPage() {
                   className={`flex gap-2 sm:gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'} chat-message`}
                 >
                   <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user'
-                      ? 'bg-indigo-500'
-                      : 'bg-gradient-to-r from-indigo-500 to-purple-500'
+                    ? 'bg-indigo-500'
+                    : 'bg-gradient-to-r from-indigo-500 to-purple-500'
                     }`}>
                     {msg.role === 'user' ? (
                       <span className="text-white font-bold text-sm">U</span>
@@ -165,8 +166,8 @@ export function ChatPage() {
                   <div className={`flex-1 max-w-[75%] sm:max-w-[70%] ${msg.role === 'user' ? 'items-end' : 'items-start'} flex flex-col`}>
                     <div
                       className={`px-3 sm:px-4 py-2 sm:py-3 rounded-2xl ${msg.role === 'user'
-                          ? 'bg-indigo-600 text-white'
-                          : 'bg-gray-100 text-gray-900'
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-gray-100 text-gray-900'
                         } shadow-sm`}
                       dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }}
                     />
