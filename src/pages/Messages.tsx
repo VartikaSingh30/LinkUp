@@ -29,6 +29,17 @@ interface AIMessage {
   timestamp: string;
 }
 
+const safeFormatTime = (dateStr: string) => {
+  try {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return '';
+    return formatDistanceToNow(date, { addSuffix: true });
+  } catch {
+    return '';
+  }
+};
+
 export function MessagesPage() {
   const { user } = useAuth();
   const location = useLocation();
@@ -114,9 +125,22 @@ export function MessagesPage() {
   };
 
   const loadAIMessages = () => {
-    const saved = localStorage.getItem('linkup.chat.history');
-    if (saved) {
-      setAIMessages(JSON.parse(saved));
+    try {
+      const saved = localStorage.getItem('linkup.chat.history');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setAIMessages(parsed);
+        } else {
+          console.warn('Invalid chat history format in localStorage, resetting.');
+          localStorage.removeItem('linkup.chat.history');
+          setAIMessages([]);
+        }
+      }
+    } catch (error) {
+      console.error('Error parsing chat history:', error);
+      localStorage.removeItem('linkup.chat.history');
+      setAIMessages([]);
     }
   };
 
@@ -151,7 +175,7 @@ export function MessagesPage() {
         // Store the last message for each user
         if (!lastMessages.has(otherId)) {
           lastMessages.set(otherId, {
-            content: msg.content,
+            content: msg.content || '',
             timestamp: msg.created_at
           });
         }
@@ -174,7 +198,7 @@ export function MessagesPage() {
             id: profile.id,
             full_name: profile.full_name || 'Unknown User',
             profile_image_url: profile.profile_image_url,
-            last_message: lastMsg ? (lastMsg.content.substring(0, 50) + (lastMsg.content.length > 50 ? '...' : '')) : '',
+            last_message: lastMsg ? ((lastMsg.content || '').substring(0, 50) + ((lastMsg.content || '').length > 50 ? '...' : '')) : '',
           });
         });
       }
@@ -349,6 +373,7 @@ export function MessagesPage() {
   };
 
   const formatMessage = (text: string) => {
+    if (!text) return '';
     return text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
@@ -504,10 +529,10 @@ export function MessagesPage() {
                                 ? 'bg-indigo-600 text-white rounded-tr-none'
                                 : 'bg-white text-gray-900 rounded-tl-none shadow-sm'
                                 }`}
-                              dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }}
+                              dangerouslySetInnerHTML={{ __html: formatMessage(msg.content || '') }}
                             />
                             <span className="text-xs text-gray-500 mt-1 px-1">
-                              {formatDistanceToNow(new Date(msg.timestamp), { addSuffix: true })}
+                              {safeFormatTime(msg.timestamp)}
                             </span>
                           </div>
                         </div>
@@ -540,9 +565,9 @@ export function MessagesPage() {
                         : 'bg-white text-gray-900 rounded-tl-none shadow-sm'
                         }`}
                     >
-                      <p>{msg.content}</p>
+                      <p>{msg.content || ''}</p>
                       <p className="text-xs mt-1 opacity-70">
-                        {formatDistanceToNow(new Date(msg.created_at), { addSuffix: true })}
+                        {safeFormatTime(msg.created_at)}
                       </p>
                     </div>
                   </div>
